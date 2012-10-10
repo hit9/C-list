@@ -11,7 +11,7 @@ void list_append(list_t *list, void *data);
 
 int list_pop_tail(list_t *list); 
 
-int list_pop(list_t *, int); 
+int list_pop(list_t *, int position); 
 
 ```
 
