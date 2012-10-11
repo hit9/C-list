@@ -7,7 +7,6 @@
 
 #include <stdlib.h>
 
-
 void list_init(list_t *list)
 {
 	list->head = NULL; 
@@ -79,5 +78,22 @@ int list_pop(list_t *list, int pos)
 	
 	head->next = temp->next; 
 	free(temp); 
+	return 1; 
+}
+
+int list_iter(list_t *list, void **data_ptr)
+{
+	static node_t *p = NULL; 
+	static int flag = 0; 
+	
+	if (!flag){ //p init to head node when the first time
+		p = list->head; 
+		flag = 1; 
+	}
+	
+	if (!p) return 0; 
+	
+	*data_ptr = p->data; 
+	p = p->next; 
 	return 1; 
 }

@@ -13,6 +13,7 @@ int list_pop_tail(list_t *list);
 
 int list_pop(list_t *, int position); 
 
+int list_iter(list_t *list, void **data_ptr); 
 ```
 
 ####TODO
@@ -26,5 +27,8 @@ replace
 
 swap
 
+get
+
+iter
 
 ```

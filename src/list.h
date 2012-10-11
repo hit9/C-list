@@ -20,4 +20,6 @@ void list_append(list_t *, void *);
 int list_pop(list_t *, int); 
 
 int list_pop_tail(list_t *); 
+
+int list_iter(list_t *, void **); 
 #endif 
