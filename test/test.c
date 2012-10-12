@@ -17,6 +17,9 @@ int main(int argc, const char *argv[])
 		printf("%s\n", s);
 	}
 	list_pop(list, 2); 
+	while(list_iter(list,(void **) &s)){
+		printf("%s\n", s);
+	}
 	free(list); 
 	return 0;
 }

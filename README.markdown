@@ -31,4 +31,6 @@ get
 
 iter
 
+reverse
+
 ```

@@ -91,8 +91,10 @@ int list_iter(list_t *list, void **data_ptr)
 		flag = 1; 
 	}
 	
-	if (!p) return 0; 
-	
+	if (!p){
+		flag = 0;
+		return 0; 
+	}
 	*data_ptr = p->data; 
 	p = p->next; 
 	return 1; 
