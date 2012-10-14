@@ -21,5 +21,7 @@ int list_pop(list_t *, int);
 
 int list_pop_tail(list_t *); 
 
+int list_get(list_t *, int, void **); 
+
 int list_iter(list_t *, void **); 
 #endif 

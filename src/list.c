@@ -99,3 +99,17 @@ int list_iter(list_t *list, void **data_ptr)
 	p = p->next; 
 	return 1; 
 }
+
+int list_get(list_t *list, int pos, void **data_ptr)
+{
+	node_t *head = list->head; 
+	int i = 0; 
+	
+	for (; head; head = head->next, i++){
+		if (i == pos) {
+			*data_ptr = head->data; 
+			return 1; 
+		}
+	}
+	return 0; 
+}

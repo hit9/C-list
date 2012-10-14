@@ -13,13 +13,12 @@ int main(int argc, const char *argv[])
 	list_append(list, "hello2"); 
 	list_append(list, "hello3"); 
 	list_append(list, "hello4"); 
-	while(list_iter(list,(void **) &s)){
-		printf("%s\n", s);
-	}
-	list_pop(list, 2); 
-	while(list_iter(list,(void **) &s)){
-		printf("%s\n", s);
-	}
+	list_get(list, 0, (void **)&s); 
+	printf("%s\n", s);
+	list_get(list, 3, (void **)&s); 
+	printf("%s\n", s);
+	list_get(list, 6, (void **)&s); 
+	printf("%s\n", s);
 	free(list); 
 	return 0;
 }
