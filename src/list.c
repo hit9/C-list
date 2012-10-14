@@ -55,6 +55,7 @@ int list_pop_tail(list_t *list)
 	for (; head->next->next; head = head->next); //goto the last second node
 	free(head->next); 
 	head->next = NULL; 
+	return 1; 
 }
 
 int list_pop(list_t *list, int pos)
@@ -113,3 +114,28 @@ int list_get(list_t *list, int pos, void **data_ptr)
 	}
 	return 0; 
 }
+
+int list_set(list_t *list, int pos, void *data)
+{
+	node_t *t; 
+	int i;
+	
+	for (t = list->head, i = 0; t; t = t->next, i++){
+		if (i == pos) {
+			t->data = data; 
+			return 1; 
+		}
+	}
+	return 0; 
+}
+
+void list_extend(list_t *list_a, list_t *list_b)
+{
+	node_t *t; 
+	if (list_a->head == NULL) list_a->head = list_b->head; 
+	else{
+		for (t = list_a->head; t->next; t = t->next); 
+		t->next = list_b->head; 
+	}
+}
+

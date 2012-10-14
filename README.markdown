@@ -15,13 +15,13 @@ int list_pop(list_t *list, int position);
 int list_iter(list_t *list, void **data_ptr); 
 
 int list_get(list_t *list, int position, void **data_ptr); 
+
+void list_extend(list_t *list_a, list_t *list_b); 
 ```
 
 ####TODO
 
 ```
-insert
-
 replace
 
 swap
