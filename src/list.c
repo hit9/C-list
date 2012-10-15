@@ -179,3 +179,10 @@ int list_swap(list_t *list, int pos_a, int pos_b)
 	b->next = a; 
 	return 1; 
 }
+
+void list_reverse(list_t *list)
+{
+	node_t *q = 0, *t, *m = list->head; 
+	for (; m; t = m->next, m->next = q, q = m, m = t); 
+	list->head = q; 
+}

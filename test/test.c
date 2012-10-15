@@ -14,8 +14,7 @@ int main(int argc, const char *argv[])
 	list_append(list, "hello2"); 
 	list_append(list, "hello3"); 
 	list_append(list, "hello4"); 
-	int d = list_swap(list, 1, 2); 
-	printf("%d\n", d);
+	list_reverse(list); 
 	while(list_iter(list,(void **) &s)){
 		printf("%s\n", s);
 	}

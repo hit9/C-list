@@ -30,4 +30,6 @@ int list_iter(list_t *, void **);
 void list_extend(list_t *, list_t *); 
 
 int list_swap(list_t *, int, int); 
+
+void list_reverse(list_t *); 
 #endif 
