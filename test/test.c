@@ -12,12 +12,10 @@ int main(int argc, const char *argv[])
 	list_init(list); 
 	list_append(list, "hello1"); 
 	list_append(list, "hello2"); 
-	list_append(list_a, "hello3"); 
-	list_append(list_a, "hello4"); 
-	list_extend(list, list_a); 
-	list_set(list, 1, "hhh"); 
-	list_set(list, 3, "sshhh"); 
-	list_set(list, 6, "hhhs"); 
+	list_append(list, "hello3"); 
+	list_append(list, "hello4"); 
+	int d = list_swap(list, 0, 1); 
+	printf("%d\n", d);
 	while(list_iter(list,(void **) &s)){
 		printf("%s\n", s);
 	}
