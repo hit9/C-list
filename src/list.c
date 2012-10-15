@@ -141,41 +141,39 @@ void list_extend(list_t *list_a, list_t *list_b)
 
 int list_swap(list_t *list, int pos_a, int pos_b)
 {
-	node_t *t, *a_pre = 0, *b_pre = 0, *a = 0, *b = 0; 
+	node_t *t, *a_pre = 0, *b_pre = 0, *a = 0, *b = 0, *head = list->head; 
 	int i; 
 	
-	for (t = list->head, i = 0; t; t = t->next, i++){
-		if (i == pos_a-1) a_pre = t; 
-		if (i == pos_b-1) b_pre = t; 
+	if (pos_a == 0) a = head; 
+	if (pos_b == 0) b = head; 
+	
+	for (t = head, i = 0; t; t = t->next, i++){
+		if (i == pos_a-1) {
+			a_pre = t; 
+			a = t->next; 
+		}
+		if (i == pos_b-1) {
+			b_pre = t; 
+			b = t->next; 
+		}
 	}
 	
-	if (!a_pre  && !b_pre) return 0; //in correct condition, a_pre & b_pre can only one be 0 at most
+	if (!a || !b) return 0; //wrong input position
+	if (a == b) return 0; //do not swap the same node
 	
-	if (!a_pre){//if not see a_pre
-		if (pos_a != 0) return -1; //only when pos_a == 0, a_pre can be 0
-		
-		a = list->head;  //a is the head, get a
-		b = b_pre->next; //get b
-		//change pre node's next 
+	//change pre node's next
+	if (a == head){
 		list->head = b; 
 		b_pre->next = a; 
-	}else{
-		a = a_pre->next; //get a
-		if (b_pre){
-			b = b_pre->next; //get b
-			//change pre node's next
-			b_pre->next = a; 
-		}else{
-			if (pos_b != 0) return -2; 
-			
-			b = list->head; //b is the head,  get b
-			
-			list->head = a; 
-		}
+	}else if (b == head){
+		list->head = a; 
 		a_pre->next = b; 
+	}else{
+		a_pre->next = b; 
+		b_pre->next = a; 
 	}
 	
-	if (!a || !b) return -3; 
+	//change a and b's next
 	t = a->next; 
 	a->next = b->next; 
 	b->next = a; 
