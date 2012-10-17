@@ -186,3 +186,14 @@ void list_reverse(list_t *list)
 	for (; m; t = m->next, m->next = q, q = m, m = t); 
 	list->head = q; 
 }
+
+int list_index(list_t *list, void *data)
+{
+	node_t *t = list->head; 
+	int i = 0; 
+	
+	for (; t; t = t->next, i++){
+		if (t->data == data) return i; 
+	}
+	return -1; 
+}

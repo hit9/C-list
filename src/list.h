@@ -25,6 +25,8 @@ int list_get(list_t *, int, void **);
 
 int list_set(list_t *, int, void *); 
 
+int list_index(list_t *, void *); 
+
 int list_iter(list_t *, void **); 
 
 void list_extend(list_t *, list_t *); 
