@@ -82,10 +82,11 @@ int list_pop(list_t *list, int pos)
 	return 1; 
 }
 
-int list_iter(list_t *list, void **data_ptr)
+int list_iter(list_t *list, void **data_ptr, int *pos_ptr)
 {
 	static node_t *p = NULL; 
 	static int flag = 0; 
+	static int pos = 0; 
 	
 	if (!flag){ //p init to head node when the first time
 		p = list->head; 
@@ -97,7 +98,10 @@ int list_iter(list_t *list, void **data_ptr)
 		return 0; 
 	}
 	*data_ptr = p->data; 
+	*pos_ptr = pos; 
+	//move next
 	p = p->next; 
+	pos += 1; 
 	return 1; 
 }
 
@@ -199,11 +203,18 @@ int list_index(list_t *list, void *data)
 }
 
 
-void list_cycle(list_t *list, void **data_ptr)
+void list_cycle(list_t *list, void **data_ptr, int * pos_ptr)
 {
 	static node_t *p = NULL;
-
-	if (!p) p = list->head; 
+	static int pos = 0; 
+	if (!p) {
+		p = list->head; 
+		pos = 0; 
+	}
+	//get data, index
 	*data_ptr = p->data;
+	*pos_ptr = pos; 
+	//move
 	p = p->next;
+	pos += 1; 
 }
