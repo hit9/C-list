@@ -30,6 +30,6 @@ void list_reverse(list_t *list);
 
 int list_index(list_t *list, void *data); //lookup data in list.if found success, return its first found position, else return -1; 
 
-void list_cycle(list_t *list, void **data_ptr, void **pos_ptr); //cycle iter for list.infinite iterator
+void list_cycle(list_t *list, void **data_ptr, int *pos_ptr); //cycle iter for list.infinite iterator
 
 ```
