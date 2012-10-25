@@ -197,3 +197,13 @@ int list_index(list_t *list, void *data)
 	}
 	return -1; 
 }
+
+
+void list_cycle(list_t *list, void **data_ptr)
+{
+	static node_t *p = NULL;
+
+	if (!p) p = list->head; 
+	*data_ptr = p->data;
+	p = p->next;
+}

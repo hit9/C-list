@@ -34,4 +34,6 @@ void list_extend(list_t *, list_t *);
 int list_swap(list_t *, int, int); 
 
 void list_reverse(list_t *); 
+
+void list_cycle(list_t *, void **); 
 #endif 
