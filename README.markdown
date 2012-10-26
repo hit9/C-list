@@ -54,3 +54,7 @@ typedef struct list {
 	node_t *head; 
 } list_t; 
 ```
+
+### wiki
+
+中文wiki见:[http://hit9.org/wiki/C-list/](http://hit9.org/wiki/C-list/)
