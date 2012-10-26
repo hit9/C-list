@@ -1,0 +1,36 @@
+%title C-list - C语言实现的单链表WIKI
+
+author:[hit9](http://hit9.org)
+
+email:[nz2324#126.com](mailto:nz2324@126.com)
+
+C-list:[github.com/hit9/C-list](http://github.com/hit9/C-list)
+
+[TOC]
+
+
+## code example
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+int main(int argc, const char *argv[])
+{
+	list_t *list = (list_t *)malloc(sizeof(list_t)); 
+	list_init(list); //初始化链表
+	
+	list_append(list, "hello"); //追加结点
+	list_append(list, "world"); 
+	list_append(list, "hehe"); 
+	
+	int i; 
+	char *temp; 
+	
+	for (i = 0; i < list_len(list); i++){//list_len获取链表的长度
+		list_get(list, i, (void **)&temp); //取得位置为i的结点的数据
+		printf("%s\n", temp);
+	}
+	return 0;
+}
+```
