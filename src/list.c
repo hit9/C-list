@@ -219,4 +219,3 @@ void list_cycle(list_t *list, void **data_ptr, int * pos_ptr)
 	//move
 	p = p->next;
 }
-
