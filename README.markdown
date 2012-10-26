@@ -54,7 +54,3 @@ typedef struct list {
 	node_t *head; 
 } list_t; 
 ```
-
-### Note
-
-the list only store pointers of data, but not data.
