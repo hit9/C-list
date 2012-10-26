@@ -30,6 +30,14 @@ static node_t *new_node(void *data)
 	return node; 
 }
 
+static int get_index_by_node(list_t *list, node_t *p)
+{
+	int i; 
+	node_t *t = list->head; 
+	for (i = 0; t != p; t = t->next, i++); 
+	return i; 
+}
+
 void list_append(list_t *list, void *data)
 {
 	node_t *head = list->head, *node = new_node(data); 
@@ -96,11 +104,8 @@ int list_iter(list_t *list, void **data_ptr, int *pos_ptr)
 		flag = 0;
 		return 0; 
 	}
-	*data_ptr = p->data; //get data
-	node_t *t = list->head; 
-	int i; 
-	for (i = 0; t != p; t = t->next, i++); 
-	*pos_ptr = i; //get index
+	*data_ptr = p->data; //get data 
+	*pos_ptr = get_index_by_node(list, p); //get index
 	//move next
 	p = p->next; 
 	return 1; 
@@ -210,11 +215,8 @@ void list_cycle(list_t *list, void **data_ptr, int * pos_ptr)
 	if (!p) p = list->head; 
 	
 	*data_ptr = p->data;//get data
-	
-	node_t *t = list->head; 
-	int i; 
-	for (i = 0; t != p; t = t->next, i++); 
-	*pos_ptr = i; //get index
+	*pos_ptr = get_index_by_node(list, p); //get index
 	//move
 	p = p->next;
 }
+
