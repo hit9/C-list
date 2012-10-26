@@ -6,6 +6,8 @@ email:[nz2324#126.com](mailto:nz2324@126.com)
 
 C-list:[github.com/hit9/C-list](http://github.com/hit9/C-list)
 
+简单的单链表的C语言封装
+
 [TOC]
 
 
@@ -32,5 +34,199 @@ int main(int argc, const char *argv[])
 		printf("%s\n", temp);
 	}
 	return 0;
+}
+```
+
+编译:`gcc <path-to>list.c test.c -I<path-to-list.h>`
+
+## 数据类型
+
+```c
+list_t
+```
+
+## 链表的数据结构
+
+```
+typedef struct node {
+    void *data;
+    struct node *next;
+} node_t; 
+
+typedef struct list {
+    node_t *head; 
+} list_t; 
+```
+
+## list_init
+
+```c
+void list_init(list_t *list);
+```
+
+传入一个list_t *指针, 把链表头指向NULL
+
+## list_len
+
+```c
+int list_len(list_t *list); 
+```
+返回链表的长度.
+
+## list_append
+```c
+void list_append(list_t *list, void *data); 
+```
+在链表的末尾追加一个结点, 其数据为data
+## list_get
+```c
+int list_get(list_t *list, int position, void **data_ptr); 
+```
+获取位置为position的数据, 执行失败返回0, 执行成功返回1
+## list_set
+
+```c
+int list_set(list_t *list, int pos, void *data); 
+```
+把位置为pos的数据设置为data.执行失败返回0, 执行成功返回1
+
+## list_pop_tail
+
+```c
+int list_pop_tail(list_t *list); 
+```
+删除末尾元素, 执行成功返回1, 失败返回0
+
+## list_pop
+
+```c
+int list_pop(list_t *list, int position); 
+```
+删除位置为position的元素, 执行成功返回1, 失败返回0
+
+## list_iter
+
+```c
+int list_iter(list_t *list, void **data_ptr, int *pos_ptr); 
+```
+迭代链表.函数每执行一次, 取出数据data和位置, 并移动到下一元素.取出成功返回1, 否则返回0(迭代完毕)
+
+例子:
+
+```c
+list_t *list = (list_t *)malloc(sizeof(list_t)); 
+list_init(list); 
+
+list_append(list, "hello"); 
+list_append(list, "world"); 
+list_append(list, "hehe"); 
+
+char *data; //用来取出数据
+int pos; //用来记录位置
+
+while(list_iter(list, (void **)&data, &pos))//迭代打印链表
+	printf("%s %d\n", data, pos);
+```
+## list_extend
+
+```c
+void list_extend(list_t *list_a, list_t *list_b); 
+```
+把链表list_b连接到list_a后面.
+
+## list_swap
+
+```c
+int list_swap(list_t *list, int pos_a, int pos_b); 
+```
+交换位置为pos_a和pos_b上的元素, 成功返回1, 否则返回0
+
+## list_reverse
+
+```c
+void list_reverse(list_t *list); 
+```
+
+反转一个链表
+
+## list_index
+
+```c
+int list_index(list_t *list, void *data); 
+```
+在链表中查找数据为data的结点, 返回找到的第一个符合条件的结点的位置, 否则找不到的话返回-1
+
+## list_from_array
+
+```c
+int list_from_array(list_t *list, void *ptr, int size, int len); //make a list from array.
+```
+
+从一个数组生成一个链表(list必须是空链表才可以).
+
+例子
+```c
+list_t *list = (list_t *)malloc(sizeof(list_t)); 
+
+list_init(list); 
+
+char str[] = "hello"; 
+//根据str字符数组生成一个链表
+list_from_array(list, (void *)str, sizeof(char), 5); 
+//打印链表
+char *data; 
+int pos; 
+while(list_iter(list, (void **)&data, &pos))
+	printf("%c %d\n", *data, pos);
+```
+
+或者根据一个整数数组来生成:
+```c
+list_t *list = (list_t *)malloc(sizeof(list_t)); 
+
+list_init(list); 
+int arr[6] = {1, 2, 3, 4, 5, 6}; 
+list_from_array(list, (void *)arr, sizeof(int), 6); 
+//打印链表
+int *data; 
+int pos; 
+while(list_iter(list, (void **)&data, &pos))
+	printf("%d %d\n", *data, pos);
+```
+但是如下的数组arr是不可以的:
+```c
+char *arr[] = {"hello", "world", "hi"}; //因为这个数组存储的各个指针之间不是等差连续的
+```
+但是这个arr可以:
+```c
+char a[] = "hello"; 
+char b[] = "world"; 
+char c[] = "hi"; 
+char *arr[] = {a, b, c}; 
+```
+
+## list_cycle
+
+```c
+void list_cycle(list_t *list, void **data_ptr, int *pos_ptr); 
+```
+ 
+循环迭代器.相比list_iter而言, 就是不断重复的遍历到尾再回到头.
+
+例子:
+```c
+list_t *list = (list_t *)malloc(sizeof(list_t)); 
+
+list_init(list); 
+
+int arr[6] = {1, 2, 3, 4, 5, 6}; 
+
+list_from_array(list, (void *)arr, sizeof(int), 6); 
+
+int *data;
+int k = 20, pos; 
+while(k--){
+	list_cycle(list, (void **)&data, &pos); 
+	printf("%d %d\n", *data, pos);
 }
 ```
