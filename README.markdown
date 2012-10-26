@@ -32,6 +32,8 @@ int list_index(list_t *list, void *data); //lookup data in list.if found success
 
 void list_cycle(list_t *list, void **data_ptr, int *pos_ptr); //cycle iter for list.infinite iterator
 
+int list_from_array(list_t *list, void *ptr, int size, int len); //make a list from array.
+
 ```
 
 ### data type

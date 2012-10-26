@@ -36,4 +36,6 @@ int list_swap(list_t *, int, int);
 void list_reverse(list_t *); 
 
 void list_cycle(list_t *, void **, int *); 
+
+int list_from_array(list_t *, void *, int, int); 
 #endif 

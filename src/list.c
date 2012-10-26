@@ -219,3 +219,16 @@ void list_cycle(list_t *list, void **data_ptr, int * pos_ptr)
 	//move
 	p = p->next;
 }
+
+int list_from_array(list_t *list, void *ptr, int size, int len)
+{
+	if (list->head) return 0; //list is not empty
+	
+	int i; 
+	node_t *t; 
+	
+	list->head = new_node(ptr); //init head
+	
+	for (i = 1, t = list->head; i < len; i++, t = t->next)
+		t->next = new_node(ptr+size*i); 
+}
