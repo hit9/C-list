@@ -86,7 +86,6 @@ int list_iter(list_t *list, void **data_ptr, int *pos_ptr)
 {
 	static node_t *p = NULL; 
 	static int flag = 0; 
-	static int pos = 0; 
 	
 	if (!flag){ //p init to head node when the first time
 		p = list->head; 
@@ -97,11 +96,13 @@ int list_iter(list_t *list, void **data_ptr, int *pos_ptr)
 		flag = 0;
 		return 0; 
 	}
-	*data_ptr = p->data; 
-	*pos_ptr = pos; 
+	*data_ptr = p->data; //get data
+	node_t *t = list->head; 
+	int i; 
+	for (i = 0; t != p; t = t->next, i++); 
+	*pos_ptr = i; //get index
 	//move next
 	p = p->next; 
-	pos += 1; 
 	return 1; 
 }
 
