@@ -206,15 +206,14 @@ int list_index(list_t *list, void *data)
 void list_cycle(list_t *list, void **data_ptr, int * pos_ptr)
 {
 	static node_t *p = NULL;
-	static int pos = 0; 
-	if (!p) {
-		p = list->head; 
-		pos = 0; 
-	}
-	//get data, index
-	*data_ptr = p->data;
-	*pos_ptr = pos; 
+	if (!p) p = list->head; 
+	
+	*data_ptr = p->data;//get data
+	
+	node_t *t = list->head; 
+	int i; 
+	for (i = 0; t != p; t = t->next, i++); 
+	*pos_ptr = i; //get index
 	//move
 	p = p->next;
-	pos += 1; 
 }
