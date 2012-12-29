@@ -2,12 +2,12 @@
 #define LIST_H 1
 
 typedef struct node {
-	void *data;
-	struct node *next;
+    void *data;
+    struct node *next;
 } node_t; 
 
 typedef struct list {
-	node_t *head; 
+    node_t *head; 
 } list_t; 
 
 
