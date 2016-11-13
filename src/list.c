@@ -186,7 +186,7 @@ int list_swap(list_t *list, int pos_a, int pos_b)
     //change a and b's next
     t = a->next; 
     a->next = b->next; 
-    b->next = a; 
+    b->next = t; 
     return 1; 
 }
 
